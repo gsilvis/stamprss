@@ -1,0 +1,44 @@
+Modeled after the suckless browser, Surf.
+Links against webkit, GTK, and libgrss.
+
+Webkit for the rendering of the HTML
+GTK for being a window. (I would like to make it embed-capable, too.)
+libgrss for easily managing the rss/atom side of it.
+
+Stores a list of feeds in OPML. (groupings won't be used for anything yet, though)
+
+Permanently stores the timestamp that you're considered up-to-date-to
+
+Running:
+  Checks timestamp file.
+  Fetches feeds.
+  Displays updates from after the old timestamp file, in order from oldest to newest.
+  Upon exiting, you can either keep the old timestamp (meaning you'll read all of them again), or write the timestamp of the last update you read.
+  You could also exit before reading everything, if you want. Then you can resume, as the timestamp will have been partially updated.
+
+
+Parse OPML to get a FeedsGroup.
+Exctract from the FeedsGroup a GList of FeedChannels.
+For each FeedChannel, I need to:
+  curl the feed to get an xmldocptr
+    To do this, I will use libcurl's "easy" interface
+  invoke a feedparser to get a GList of FeedItems
+  For each FeedItem, either add it to the GList of all items to be viewed, or throw it out. [add-sorted]
+
+
+
+
+
+
+Sort the GList by timestamp comparison. (use g_list_sort with a GCompareFunc that references feed_item_get_publish_time)
+View them in order! (use feed_item_get_description)
+
+
+For displaying a single item:
+
+Take the description, load it with:
+webkit_web_frame_load_string(frame, CONTENT, "text/html", NULL, /* what here? */);
+
+
+
+
