@@ -1,5 +1,5 @@
-/* This file is part of rockfall, a simple Webkit-based rss reader */
-/* rockfall is licensed under the GPL v3 */
+/* This file is part of stamprss, a simple Webkit-based rss reader */
+/* stamprss is licensed under the GPL v3 */
 
 
 
@@ -97,7 +97,7 @@ main (int argc,
   
   GError *error = NULL;
   FeedsGroup *fg = feeds_group_new();
-  GList *feeds = feeds_group_parse_file(fg, "/home/george/Git/stamprss/feedlist.opml", error);
+  GList *feeds = feeds_group_parse_file(fg, "feedlist.opml", error);
 
   if (!feeds) {
     printf("Error: %s\n", error->message);
